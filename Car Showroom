@@ -1,0 +1,61 @@
+class Car:
+    def __init__(self, car_type, model, brand):
+        self.car_type = car_type
+        self.model = model
+        self.brand = brand
+
+class Buyer:
+    def __init__(self, name, age, gender):
+        self.name = name
+        self.age = age
+        self.gender = gender
+
+class CarDealership:
+    def __init__(self):
+        self.cars_in_stock = []
+        self.sold_cars = []
+        self.buyers = []
+
+    def add_car(self, car):
+        self.cars_in_stock.append(car)
+
+    def sell_car(self, car, buyer):
+        self.cars_in_stock.remove(car)
+        self.sold_cars.append((car, buyer))
+        self.buyers.append(buyer)
+
+    def edit_car_information(self, car, new_model, new_brand):
+        car.model = new_model
+        car.brand = new_brand
+
+    def edit_buyer_information(self, buyer, new_name, new_age, new_gender):
+        buyer.name = new_name
+        buyer.age = new_age
+        buyer.gender = new_gender
+
+    def show_stock_information(self):
+        for car in self.cars_in_stock:
+            print(f"{car.brand} {car.model} - {car.car_type}")
+
+    def show_sales_information(self):
+        for car, buyer in self.sold_cars:
+            print(f"Sold: {car.brand} {car.model} - {car.car_type} to {buyer.name}")
+
+
+# Пример использования информационной системы
+car1 = Car("легковой", "Crown", "Toyota")
+car2 = Car("грузовой", "Hilux", "Toyota")
+buyer1 = Buyer("Ivan Ivanov", 35, "male")
+buyer2 = Buyer("Anna Petrova", 28, "female")
+
+dealership = CarDealership()
+dealership.add_car(car1)
+dealership.add_car(car2)
+dealership.show_stock_information()
+
+dealership.sell_car(car1, buyer1)
+dealership.sell_car(car2, buyer2)
+dealership.show_sales_information()
+
+dealership.edit_buyer_information(buyer1, "Igor Ivanov", 36, "male")
+dealership.edit_car_information(car2, "Hilux Premium", "Toyota")
